@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="python" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Matplotlib2LaTeX &mdash; Matplotlib2LaTeX 16/02/2021 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to Matplotlib2LaTeX&#39;s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Matplotlib2LaTeX
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Matplotlib2LaTeX</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Matplotlib2LaTeX</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Matplotlib2LaTeX</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/mballarin97/Matplotlib2LaTeX/blob/masterdocs/mpl2latex.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="matplotlib2latex">
+<h1>Matplotlib2LaTeX<a class="headerlink" href="#matplotlib2latex" title="Permalink to this headline">¶</a></h1>
+<p>We show here the code</p>
+<span class="target" id="module-mpl2latex"></span><dl class="py class">
+<dt id="mpl2latex.Matplotlib2LaTeX">
+<em class="property">class </em><code class="sig-prename descclassname">mpl2latex.</code><code class="sig-name descname">Matplotlib2LaTeX</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fig</span></em>, <em class="sig-param"><span class="n">SMALL_SIZE</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">MEDIUM_SIZE</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">BIGGER_SIZE</span><span class="o">=</span><span class="default_value">11</span></em>, <em class="sig-param"><span class="n">BIGGEST_SIZE</span><span class="o">=</span><span class="default_value">12</span></em>, <em class="sig-param"><span class="n">packages</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpl2latex.html#Matplotlib2LaTeX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mpl2latex.Matplotlib2LaTeX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot matplotlib figure in pgf for perfect LaTeX reports</p>
+<blockquote>
+<div><p>Class to plot matplotlib figures using the pgf backend, swapping easily between
+the two. All the commands that you would use with matplotlib to plot on axes can be
+used with this class, using self.ax</p>
+<dl class="simple">
+<dt>fig: matplotlib.figure.Figure</dt><dd><p>Figure that we want to work with</p>
+</dd>
+<dt>ax: matplotlib.axes</dt><dd><p>Axes of the Figure</p>
+</dd>
+<dt>SMALL_SIZE<span class="classifier">float, optional</span></dt><dd><p>Size of the font for default text sizes and tick labels. Default 8.</p>
+</dd>
+<dt>MEDIUM_SIZE<span class="classifier">float, optional</span></dt><dd><p>Font size for x-y labels and legend. Default 10.</p>
+</dd>
+<dt>BIGGER_SIZE: float, optional</dt><dd><p>Font size for axes title. Default 11.</p>
+</dd>
+<dt>BIGGEST_SIZE: float, optional</dt><dd><p>Font size fot the figure title. Default 12.</p>
+</dd>
+<dt>packages: list of strings, optional</dt><dd><p>LaTeX packages to use, in the form &quot;usepackage[options]{package}&quot;. If None
+only &quot;usepackage[utf8]{inputenc}&quot; is used.</p>
+</dd>
+<dt>all_backends: list of string</dt><dd><p>All possible backends for matplotlib</p>
+</dd>
+<dt>original_backend: string</dt><dd><p>Original backend when the class is initialized</p>
+</dd>
+<dt>original_rcParams: matplotlib.RcParams</dt><dd><p>Original rcParams when the class is initialized</p>
+</dd>
+</dl>
+<dl>
+<dt>reset(rcparams = None, backend = None)</dt><dd><p>Reset matplotlib rcParams and backend to default ones.</p>
+<dl class="simple">
+<dt>rcparams<span class="classifier">matplotlib.RcParams, optional</span></dt><dd><p>matplotlib rc params. Default is original RcParams</p>
+</dd>
+<dt>backend<span class="classifier">string</span></dt><dd><p>matplotlib new backend</p>
+</dd>
+</dl>
+</dd>
+<dt>reset_backend(self, backend=None)</dt><dd><p>Reset matplotlib backend</p>
+<dl class="simple">
+<dt>backend<span class="classifier">string, optional</span></dt><dd><p>Matplotlib backend to reset. Default is original_backend</p>
+</dd>
+</dl>
+</dd>
+<dt>save_fig(PATH, backend='pgf', tight=True)</dt><dd><p>Save the figure with the backend <em>backend</em>, coming back to the backend <em>original_backend</em> afterwards.</p>
+<dl class="simple">
+<dt>PATH: string</dt><dd><p>PATH where to save the image</p>
+</dd>
+<dt>backend: sting, optional</dt><dd><p>backend to use to save the figure. Default pgf</p>
+</dd>
+<dt>tight: bool</dt><dd><p>If True, use tightlayout</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>show()</dt><dd><p>Show the figure</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="mpl2latex.Matplotlib2LaTeX.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rcparams</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">backend</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpl2latex.html#Matplotlib2LaTeX.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mpl2latex.Matplotlib2LaTeX.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset matplotlib rcParams and backend to default ones.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rcparams</strong> (<em>matplotlib.RcParams</em><em>, </em><em>optional</em>) -- matplotlib rc params. Default is original RcParams</p></li>
+<li><p><strong>backend</strong> (<em>string</em>) -- matplotlib new backend</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mpl2latex.Matplotlib2LaTeX.reset_backend">
+<code class="sig-name descname">reset_backend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">backend</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpl2latex.html#Matplotlib2LaTeX.reset_backend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mpl2latex.Matplotlib2LaTeX.reset_backend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset matplotlib backend</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>backend</strong> (<em>string</em><em>, </em><em>optional</em>) -- Matplotlib backend to reset. Default is original_backend</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mpl2latex.Matplotlib2LaTeX.save_fig">
+<code class="sig-name descname">save_fig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">PATH</span></em>, <em class="sig-param"><span class="n">backend</span><span class="o">=</span><span class="default_value">'pgf'</span></em>, <em class="sig-param"><span class="n">tight</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpl2latex.html#Matplotlib2LaTeX.save_fig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mpl2latex.Matplotlib2LaTeX.save_fig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the figure</p>
+<p>Save the figure with the backend <em>backend</em>, coming back to the backend <em>original_backend</em> afterwards.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>PATH</strong> (<em>string</em>) -- PATH where to save the image</p></li>
+<li><p><strong>backend</strong> (<em>sting</em><em>, </em><em>optional</em>) -- backend to use to save the figure. Default pgf</p></li>
+<li><p><strong>tight</strong> (<em>bool</em>) -- If True, use tightlayout</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="mpl2latex.latex_figsize">
+<code class="sig-prename descclassname">mpl2latex.</code><code class="sig-name descname">latex_figsize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wf</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">hf</span><span class="o">=</span><span class="default_value">0.6180339887498949</span></em>, <em class="sig-param"><span class="n">columnwidth</span><span class="o">=</span><span class="default_value">510</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpl2latex.html#latex_figsize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mpl2latex.latex_figsize" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Get the correct figure size to be displayed in a latex report/publication</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wf</strong> (<em>float</em><em>, </em><em>optional</em>) -- width fraction in columnwidth units. Default to 0.5</p></li>
+<li><p><strong>hf</strong> (<em>float</em><em>, </em><em>optional</em>) -- height fraction in columnwidth units. Set by default to golden ratio.</p></li>
+<li><p><strong>columnwidth</strong> (<em>float</em>) -- width of the column in latex. Get this from LaTeX using showthecolumnwidth
+Default to 510</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fig_size</strong> -- fig_size [width, height] that should be given to matplotlib</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Matplotlib2LaTeX&#39;s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marco Ballarin.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
