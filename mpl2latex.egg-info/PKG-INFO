@@ -7,10 +7,138 @@ Author: Marco Ballarin
 Author-email: marco97.ballarin@gmail.com
 License: UNKNOWN
 Description: # Matplotlib2LaTeX
-        An high-level python library to have your plots in pgf, the perfect format for an awesome LaTeX report/publication.
+        An high-level python library to have your plots in pgf, the perfect format for an awesome LaTeX report/publication. The documentation is available at this [link](https://mballarin97.github.io/Matplotlib2LaTeX/)
         
         Sometimes there may be an error about the a matplotlib lockfile. Just restart the kernel.
         
+        ## Installation
+        To install simply run 
+        ```bash
+        pip install mpl2latex
+        ```
+        it requires matplotlib to work.
+        
+        ## Example of use on jupyter notebook
+        
+        First, we import numpy, matplotlib and the new library MPL2LATEX. We will then make some examples with different type of implementation
+        
+        
+        ```python
+        import numpy as np
+        import matplotlib.pyplot as plt
+        import matplotlib
+        from mpl2latex import Matplotlib2LaTeX, latex_figsize
+        ```
+        
+        We will plot some simple data, let's say a quadratic function
+        
+        
+        ```python
+        x = np.linspace(1, 100, 1000)
+        ```
+        
+        
+        ```python
+        fig, ax = plt.subplots(figsize=latex_figsize( wf=0.8) ) # width of an entire latex column
+        ax.plot(x, x**2)
+        ax.set_xlabel('x')
+        ax.set_ylabel('$x^2$')
+        ax.set_title('Trial')
+        plt.show()
+        ```
+        
+        
+            
+        ![svg](Examples_files/Examples_4_0.svg)
+            
+        
+        
+        Now, we make the same but with the parameters of Matplotlib2LaTeX, using it from the start
+        
+        
+        ```python
+        fig, ax = plt.subplots(figsize=latex_figsize( wf=0.8) ) # width of an entire latex column
+        ltx = Matplotlib2LaTeX(fig)
+        ltx.ax[0].plot(x, x**2)
+        ltx.ax[0].set_xlabel('x')
+        ltx.ax[0].set_ylabel('$x^2$')
+        ltx.ax[0].set_title('Trial')
+        ltx.show()
+        ```
+        
+        
+            
+        ![png](Examples_files/Examples_6_0.png)
+            
+        
+        
+        We can easily come back to the default settings for matplolib
+        
+        
+        ```python
+        ltx.reset()
+        fig, ax = plt.subplots(figsize=latex_figsize( wf=0.8) ) # width of an entire latex column
+        ax.plot(x, x**2)
+        ax.set_xlabel('x')
+        ax.set_ylabel('$x^2$')
+        ax.set_title('Trial')
+        plt.show()
+        ```
+        
+        
+            
+        ![png](Examples_files/Examples_8_0.png)
+            
+        
+        
+        But we can also save the figure in pgf and then we automatically come back to our usual backend to visualize the plots in the jupyter environment!
+        
+        
+        ```python
+        fig, ax = plt.subplots(figsize=latex_figsize( wf=0.8) ) # width of an entire latex column
+        ltx = Matplotlib2LaTeX(fig)
+        ltx.ax[0].plot(x, x**2)
+        ltx.ax[0].set_xlabel('x')
+        ltx.ax[0].set_ylabel('$x^2$')
+        ltx.ax[0].set_title('Trial')
+        ltx.save_fig('Trial.pgf')
+        ```
+        
+        You have your pgf file, but you can continue to work on the notebook!
+        
+        
+        ```python
+        fig, ax = plt.subplots(figsize=latex_figsize( wf=1) ) # width of an entire latex column
+        ax.plot(x, x**3)
+        ax.set_xlabel('x')
+        ax.set_ylabel('$x^3$')
+        ax.set_title('Trial')
+        plt.show()
+        ```
+        
+        
+            
+        ![png](Examples_files/Examples_12_0.png)
+            
+        
+        
+        ## Using the pgf output in LaTeX
+        Now that we have finally reproduced the plot in pgf we show how to import it in a LaTeX document. It is really straightforward, using the `pgfplots` package. We make an example of the following here:
+        
+        ```latex
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        \begin{figure}
+            \centering
+            \input{Trial.pgf}
+            \caption{Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.}
+            \label{fig:trial}
+        \end{figure}
+        ```
+        
+        which gives the following output. It is a little blurred, but you can look at the original `.pdf` in the folder `Examples_files`
+        
+        
+        ![png](Examples_files/latex.PNG)
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License

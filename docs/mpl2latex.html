@@ -158,112 +158,7 @@
   <div class="section" id="matplotlib2latex">
 <h1>Matplotlib2LaTeX<a class="headerlink" href="#matplotlib2latex" title="Permalink to this headline">¶</a></h1>
 <p>We show here the code</p>
-<span class="target" id="module-mpl2latex"></span><dl class="py class">
-<dt id="mpl2latex.Matplotlib2LaTeX">
-<em class="property">class </em><code class="sig-prename descclassname">mpl2latex.</code><code class="sig-name descname">Matplotlib2LaTeX</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fig</span></em>, <em class="sig-param"><span class="n">SMALL_SIZE</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">MEDIUM_SIZE</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">BIGGER_SIZE</span><span class="o">=</span><span class="default_value">11</span></em>, <em class="sig-param"><span class="n">BIGGEST_SIZE</span><span class="o">=</span><span class="default_value">12</span></em>, <em class="sig-param"><span class="n">packages</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpl2latex.html#Matplotlib2LaTeX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mpl2latex.Matplotlib2LaTeX" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot matplotlib figure in pgf for perfect LaTeX reports</p>
-<blockquote>
-<div><p>Class to plot matplotlib figures using the pgf backend, swapping easily between
-the two. All the commands that you would use with matplotlib to plot on axes can be
-used with this class, using self.ax</p>
-<dl class="simple">
-<dt>fig: matplotlib.figure.Figure</dt><dd><p>Figure that we want to work with</p>
-</dd>
-<dt>ax: matplotlib.axes</dt><dd><p>Axes of the Figure</p>
-</dd>
-<dt>SMALL_SIZE<span class="classifier">float, optional</span></dt><dd><p>Size of the font for default text sizes and tick labels. Default 8.</p>
-</dd>
-<dt>MEDIUM_SIZE<span class="classifier">float, optional</span></dt><dd><p>Font size for x-y labels and legend. Default 10.</p>
-</dd>
-<dt>BIGGER_SIZE: float, optional</dt><dd><p>Font size for axes title. Default 11.</p>
-</dd>
-<dt>BIGGEST_SIZE: float, optional</dt><dd><p>Font size fot the figure title. Default 12.</p>
-</dd>
-<dt>packages: list of strings, optional</dt><dd><p>LaTeX packages to use, in the form &quot;usepackage[options]{package}&quot;. If None
-only &quot;usepackage[utf8]{inputenc}&quot; is used.</p>
-</dd>
-<dt>all_backends: list of string</dt><dd><p>All possible backends for matplotlib</p>
-</dd>
-<dt>original_backend: string</dt><dd><p>Original backend when the class is initialized</p>
-</dd>
-<dt>original_rcParams: matplotlib.RcParams</dt><dd><p>Original rcParams when the class is initialized</p>
-</dd>
-</dl>
-<dl>
-<dt>reset(rcparams = None, backend = None)</dt><dd><p>Reset matplotlib rcParams and backend to default ones.</p>
-<dl class="simple">
-<dt>rcparams<span class="classifier">matplotlib.RcParams, optional</span></dt><dd><p>matplotlib rc params. Default is original RcParams</p>
-</dd>
-<dt>backend<span class="classifier">string</span></dt><dd><p>matplotlib new backend</p>
-</dd>
-</dl>
-</dd>
-<dt>reset_backend(self, backend=None)</dt><dd><p>Reset matplotlib backend</p>
-<dl class="simple">
-<dt>backend<span class="classifier">string, optional</span></dt><dd><p>Matplotlib backend to reset. Default is original_backend</p>
-</dd>
-</dl>
-</dd>
-<dt>save_fig(PATH, backend='pgf', tight=True)</dt><dd><p>Save the figure with the backend <em>backend</em>, coming back to the backend <em>original_backend</em> afterwards.</p>
-<dl class="simple">
-<dt>PATH: string</dt><dd><p>PATH where to save the image</p>
-</dd>
-<dt>backend: sting, optional</dt><dd><p>backend to use to save the figure. Default pgf</p>
-</dd>
-<dt>tight: bool</dt><dd><p>If True, use tightlayout</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</div></blockquote>
-<dl class="simple">
-<dt>show()</dt><dd><p>Show the figure</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt id="mpl2latex.Matplotlib2LaTeX.reset">
-<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rcparams</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">backend</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpl2latex.html#Matplotlib2LaTeX.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mpl2latex.Matplotlib2LaTeX.reset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reset matplotlib rcParams and backend to default ones.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rcparams</strong> (<em>matplotlib.RcParams</em><em>, </em><em>optional</em>) -- matplotlib rc params. Default is original RcParams</p></li>
-<li><p><strong>backend</strong> (<em>string</em>) -- matplotlib new backend</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="mpl2latex.Matplotlib2LaTeX.reset_backend">
-<code class="sig-name descname">reset_backend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">backend</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpl2latex.html#Matplotlib2LaTeX.reset_backend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mpl2latex.Matplotlib2LaTeX.reset_backend" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reset matplotlib backend</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>backend</strong> (<em>string</em><em>, </em><em>optional</em>) -- Matplotlib backend to reset. Default is original_backend</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="mpl2latex.Matplotlib2LaTeX.save_fig">
-<code class="sig-name descname">save_fig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">PATH</span></em>, <em class="sig-param"><span class="n">backend</span><span class="o">=</span><span class="default_value">'pgf'</span></em>, <em class="sig-param"><span class="n">tight</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpl2latex.html#Matplotlib2LaTeX.save_fig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mpl2latex.Matplotlib2LaTeX.save_fig" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save the figure</p>
-<p>Save the figure with the backend <em>backend</em>, coming back to the backend <em>original_backend</em> afterwards.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>PATH</strong> (<em>string</em>) -- PATH where to save the image</p></li>
-<li><p><strong>backend</strong> (<em>sting</em><em>, </em><em>optional</em>) -- backend to use to save the figure. Default pgf</p></li>
-<li><p><strong>tight</strong> (<em>bool</em>) -- If True, use tightlayout</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
+<span class="target" id="module-mpl2latex"></span><dl class="py function">
 <dt id="mpl2latex.latex_figsize">
 <code class="sig-prename descclassname">mpl2latex.</code><code class="sig-name descname">latex_figsize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wf</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">hf</span><span class="o">=</span><span class="default_value">0.6180339887498949</span></em>, <em class="sig-param"><span class="n">columnwidth</span><span class="o">=</span><span class="default_value">510</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpl2latex.html#latex_figsize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mpl2latex.latex_figsize" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
@@ -285,6 +180,158 @@ Default to 510</p></li>
 <dd class="field-odd"><p>list of float</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="mpl2latex.mpl2latex">
+<em class="property">class </em><code class="sig-prename descclassname">mpl2latex.</code><code class="sig-name descname">mpl2latex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">back_flag</span></em>, <em class="sig-param"><span class="n">packages</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">backend</span><span class="o">=</span><span class="default_value">'pgf'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpl2latex.html#mpl2latex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mpl2latex.mpl2latex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot matplotlib figure in pgf for perfect LaTeX reports</p>
+<p>Context to plot matplotlib figures using the pgf backend, swapping easily between
+the two. Simply put your plotting commands inside the context, and enable the pgf with
+the <em>back_flag</em></p>
+<dl class="py attribute">
+<dt id="mpl2latex.mpl2latex.back_flag">
+<code class="sig-name descname">back_flag</code><a class="headerlink" href="#mpl2latex.mpl2latex.back_flag" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True use the backend <em>backend</em> with all the details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mpl2latex.mpl2latex.SMALL_SIZE">
+<code class="sig-name descname">SMALL_SIZE</code><a class="headerlink" href="#mpl2latex.mpl2latex.SMALL_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Size of the font for default text sizes and tick labels. Default 8.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mpl2latex.mpl2latex.MEDIUM_SIZE">
+<code class="sig-name descname">MEDIUM_SIZE</code><a class="headerlink" href="#mpl2latex.mpl2latex.MEDIUM_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Font size for x-y labels and legend. Default 10.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mpl2latex.mpl2latex.BIGGER_SIZE">
+<code class="sig-name descname">BIGGER_SIZE</code><a class="headerlink" href="#mpl2latex.mpl2latex.BIGGER_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Font size for axes title. Default 11.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mpl2latex.mpl2latex.BIGGEST_SIZE">
+<code class="sig-name descname">BIGGEST_SIZE</code><a class="headerlink" href="#mpl2latex.mpl2latex.BIGGEST_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Font size fot the figure title. Default 12.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mpl2latex.mpl2latex.packages">
+<code class="sig-name descname">packages</code><a class="headerlink" href="#mpl2latex.mpl2latex.packages" title="Permalink to this definition">¶</a></dt>
+<dd><p>LaTeX packages to use, in the form &quot;usepackage[options]{package}&quot;. If None
+only &quot;usepackage[utf8]{inputenc}&quot; is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list of strings, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mpl2latex.mpl2latex.original_backend">
+<code class="sig-name descname">original_backend</code><a class="headerlink" href="#mpl2latex.mpl2latex.original_backend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Original backend when the class is initialized</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mpl2latex.mpl2latex.original_rcParams">
+<code class="sig-name descname">original_rcParams</code><a class="headerlink" href="#mpl2latex.mpl2latex.original_rcParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Original rcParams when the class is initialized</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>matplotlib.RcParams</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mpl2latex.mpl2latex.backend">
+<code class="sig-name descname">backend</code><a class="headerlink" href="#mpl2latex.mpl2latex.backend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matplotlib backend to use. Default is pgf</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt>
+<code class="sig-name descname">def __init__(self, back_flag, packages = None, backend='pgf'):</code></dt>
+<dd><p>Initialize the class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>back_flag</strong> (<em>bool</em>) -- </p></li>
+<li><p><strong>True use the backend backend with all the details</strong> (<em>If</em>) -- </p></li>
+<li><p><strong>packages</strong> (<em>list of strings</em><em>, </em><em>optional</em>) -- LaTeX packages to use, in the form &quot;usepackage[options]{package}&quot;. If None
+only &quot;usepackage[utf8]{inputenc}&quot; is used.</p></li>
+<li><p><strong>original_backend</strong> (<em>string</em>) -- Original backend when the class is initialized</p></li>
+<li><p><strong>original_rcParams</strong> (<em>matplotlib.RcParams</em>) -- Original rcParams when the class is initialized</p></li>
+<li><p><strong>backend</strong> (<em>string</em><em>, </em><em>optional</em>) -- Matplotlib backend to use. Default is pgf</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mpl2latex.mpl2latex.__enter__">
+<code class="sig-name descname">__enter__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpl2latex.html#mpl2latex.__enter__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mpl2latex.mpl2latex.__enter__" title="Permalink to this definition">¶</a></dt>
+<dd><p>enter in the context</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mpl2latex.mpl2latex.__exit__">
+<code class="sig-name descname">__exit__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpl2latex.html#mpl2latex.__exit__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mpl2latex.mpl2latex.__exit__" title="Permalink to this definition">¶</a></dt>
+<dd><p>exit from the context</p>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Write the usual plotting instruction inside the context</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">mpl2ltx</span><span class="p">(</span><span class="n">flag</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;trial.pgf&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># produces the plots and save it in pgf as intended</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>

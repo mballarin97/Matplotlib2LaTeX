@@ -19,7 +19,7 @@ First, we import numpy, matplotlib and the new library MPL2LATEX. We will then m
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
-from mpl2latex import Matplotlib2LaTeX, latex_figsize
+from mpl2latex import mpl2latex, latex_figsize
 ```
 
 We will plot some simple data, let's say a quadratic function
@@ -33,7 +33,7 @@ x = np.linspace(1, 100, 1000)
 ```python
 fig, ax = plt.subplots(figsize=latex_figsize( wf=0.8) ) # width of an entire latex column
 ax.plot(x, x**2)
-ax.set_xlabel('x')
+ax.set_xlabel('Coordinate $x$')
 ax.set_ylabel('$x^2$')
 ax.set_title('Trial')
 plt.show()
@@ -45,33 +45,26 @@ plt.show()
     
 
 
-Now, we make the same but with the parameters of Matplotlib2LaTeX, using it from the start
+Now, we make the same but with the parameters of Matplotlib2LaTeX, inside the context. See the docs for a complete description of the tunable parameters
 
 
 ```python
-fig, ax = plt.subplots(figsize=latex_figsize( wf=0.8) ) # width of an entire latex column
-ltx = Matplotlib2LaTeX(fig)
-ltx.ax[0].plot(x, x**2)
-ltx.ax[0].set_xlabel('x')
-ltx.ax[0].set_ylabel('$x^2$')
-ltx.ax[0].set_title('Trial')
-ltx.show()
+flag = True
+with mpl2latex(flag):
+    fig, ax = plt.subplots(figsize=latex_figsize( wf=0.8) ) # width of an entire latex column
+    ax.plot(x, x**2)
+    ax.set_xlabel('Coordinate $x$')
+    ax.set_ylabel('$x^2$')
+    ax.set_title('Trial')
 ```
 
-
-    
-![png](Examples_files/Examples_6_0.png)
-    
-
-
-We can easily come back to the default settings for matplolib
+Once we exit from the context we easily come back to the matplotlib default backend and parameters!
 
 
 ```python
-ltx.reset()
 fig, ax = plt.subplots(figsize=latex_figsize( wf=0.8) ) # width of an entire latex column
 ax.plot(x, x**2)
-ax.set_xlabel('x')
+ax.set_xlabel('Coordinate $x$')
 ax.set_ylabel('$x^2$')
 ax.set_title('Trial')
 plt.show()
@@ -79,38 +72,7 @@ plt.show()
 
 
     
-![png](Examples_files/Examples_8_0.png)
-    
-
-
-But we can also save the figure in pgf and then we automatically come back to our usual backend to visualize the plots in the jupyter environment!
-
-
-```python
-fig, ax = plt.subplots(figsize=latex_figsize( wf=0.8) ) # width of an entire latex column
-ltx = Matplotlib2LaTeX(fig)
-ltx.ax[0].plot(x, x**2)
-ltx.ax[0].set_xlabel('x')
-ltx.ax[0].set_ylabel('$x^2$')
-ltx.ax[0].set_title('Trial')
-ltx.save_fig('Trial.pgf')
-```
-
-You have your pgf file, but you can continue to work on the notebook!
-
-
-```python
-fig, ax = plt.subplots(figsize=latex_figsize( wf=1) ) # width of an entire latex column
-ax.plot(x, x**3)
-ax.set_xlabel('x')
-ax.set_ylabel('$x^3$')
-ax.set_title('Trial')
-plt.show()
-```
-
-
-    
-![png](Examples_files/Examples_12_0.png)
+![svg](Examples_files/Examples_8_0.svg)
     
 
 
