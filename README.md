@@ -3,6 +3,13 @@ An high-level python library to have your plots in pgf, the perfect format for a
 
 Sometimes there may be an error about the a matplotlib lockfile. Just restart the kernel.
 
+## Installation
+To install simply run 
+```bash
+pip install mpl2latex
+```
+it requires matplotlib to work.
+
 ## Example of use on jupyter notebook
 
 First, we import numpy, matplotlib and the new library MPL2LATEX. We will then make some examples with different type of implementation
@@ -120,7 +127,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 \end{figure}
 ```
 
-which gives the following output
+which gives the following output. It is a little blurred, but you can look at the original `.pdf` in the folder `Examples_files`
 
 
 ![png](Examples_files/latex.PNG)
