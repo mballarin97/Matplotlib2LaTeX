@@ -1,0 +1,7 @@
+README.md
+mpl2latex.py
+setup.py
+mpl2latex.egg-info/PKG-INFO
+mpl2latex.egg-info/SOURCES.txt
+mpl2latex.egg-info/dependency_links.txt
+mpl2latex.egg-info/top_level.txt

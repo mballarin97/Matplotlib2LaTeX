@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: mpl2latex
+Version: 0.1
+Summary: A Docker and AWS utility package
+Home-page: https://github.com/mballarin97/Matplotlib2LaTeX
+Author: Marco Ballarin
+Author-email: marco97.ballarin@gmail.com
+License: UNKNOWN
+Description: # Matplotlib2LaTeX
+        An high-level python library to have your plots in pgf, the perfect format for an awesome LaTeX report/publication.
+        
+        Sometimes there may be an error about the a matplotlib lockfile. Just restart the kernel.
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
