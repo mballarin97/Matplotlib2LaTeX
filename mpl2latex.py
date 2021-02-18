@@ -72,7 +72,8 @@ class mpl2latex():
     """
     
     def __init__(self, back_flag, packages = None, backend='pgf'):
-
+        import subprocess; subprocess.check_call(["latex", "-help"])
+        
         self.back_flag = back_flag
         self.original_backend = matplotlib.pyplot.get_backend()
         self.original_rcParams = matplotlib.rcParams
@@ -95,7 +96,6 @@ class mpl2latex():
                 'pgf.rcfonts': False,
                 "pgf.preamble": "\n".join( self.packages ),
             })
-            matplotlib.use( self.backend )
 
 
     def __exit__(self, etype, value, traceback):
@@ -103,9 +103,8 @@ class mpl2latex():
         """
         # --- reset rcParams ---
         matplotlib.rcParams.update( self.original_rcParams )
-        # --- reset backend ---
-        matplotlib.use( self.original_backend )
-        
+        matplotlib.rcParams.update({ 'text.usetex' : False }) #Manually disable latex
+
 def latex_figsize(wf=0.5, hf=(5.**0.5-1.0)/2.0, columnwidth=510):
     """
         Get the correct figure size to be displayed in a latex report/publication

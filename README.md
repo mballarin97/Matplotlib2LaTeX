@@ -80,6 +80,11 @@ plt.show()
 Now that we have finally reproduced the plot in pgf we show how to import it in a LaTeX document. It is really straightforward, using the `pgfplots` package. We make an example of the following here:
 
 ```latex
+\documentclass{article}
+
+\usepackage{pgfplots} %To import .pgf images
+
+\begin{document}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 \begin{figure}
     \centering
@@ -87,6 +92,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     \caption{Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.}
     \label{fig:trial}
 \end{figure}
+\end{document}
 ```
 
 which gives the following output. It is a little blurred, but you can look at the original `.pdf` in the folder `Examples_files`
