@@ -153,6 +153,7 @@
   <h1>Source code for mpl2latex</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 
 <div class="viewcode-block" id="mpl2latex"><a class="viewcode-back" href="../mpl2latex.html#mpl2latex.mpl2latex">[docs]</a><span class="k">class</span> <span class="nc">mpl2latex</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; Plot matplotlib figure in pgf for perfect LaTeX reports</span>
@@ -224,12 +225,17 @@
 <span class="sd">                             </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">back_flag</span><span class="p">,</span> <span class="n">packages</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;pgf&#39;</span><span class="p">):</span>
-
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">back_flag</span><span class="p">,</span> <span class="n">packages</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;pgf&#39;</span><span class="p">,</span> <span class="n">SMALL_SIZE</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">MEDIUM_SIZE</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">BIGGER_SIZE</span> <span class="o">=</span> <span class="mi">11</span><span class="p">,</span> <span class="n">BIGGEST_SIZE</span> <span class="o">=</span> <span class="mi">12</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">subprocess</span><span class="p">;</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s2">&quot;latex&quot;</span><span class="p">,</span> <span class="s2">&quot;-help&quot;</span><span class="p">])</span>
+        
         <span class="bp">self</span><span class="o">.</span><span class="n">back_flag</span> <span class="o">=</span> <span class="n">back_flag</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">original_backend</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">get_backend</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">original_rcParams</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">original_rcParams</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">)</span> <span class="c1"># Necessary to create a copy, not a reference</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SMALL_SIZE</span> <span class="o">=</span> <span class="n">SMALL_SIZE</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MEDIUM_SIZE</span> <span class="o">=</span> <span class="n">MEDIUM_SIZE</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">BIGGER_SIZE</span> <span class="o">=</span> <span class="n">BIGGER_SIZE</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">BIGGEST_SIZE</span> <span class="o">=</span> <span class="n">BIGGEST_SIZE</span>
 
         <span class="k">if</span> <span class="n">packages</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">packages</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">usepackage[utf8]</span><span class="si">{inputenc}</span><span class="s2">&quot;</span> <span class="p">]</span>
@@ -248,7 +254,13 @@
                 <span class="s1">&#39;pgf.rcfonts&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
                 <span class="s2">&quot;pgf.preamble&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">packages</span> <span class="p">),</span>
             <span class="p">})</span>
-            <span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span> <span class="p">)</span></div>
+            <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">SMALL_SIZE</span><span class="p">)</span>          <span class="c1"># controls default text sizes</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">BIGGER_SIZE</span><span class="p">)</span>     <span class="c1"># fontsize of the axes title</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">MEDIUM_SIZE</span><span class="p">)</span>    <span class="c1"># fontsize of the x and y labels</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;xtick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">SMALL_SIZE</span><span class="p">)</span>    <span class="c1"># fontsize of the tick labels</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;ytick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">SMALL_SIZE</span><span class="p">)</span>    <span class="c1"># fontsize of the tick labels</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;legend&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">MEDIUM_SIZE</span><span class="p">)</span>    <span class="c1"># legend fontsize</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">BIGGEST_SIZE</span><span class="p">)</span>  <span class="c1"># fontsize of the figure title</span></div>
 
 
 <div class="viewcode-block" id="mpl2latex.__exit__"><a class="viewcode-back" href="../mpl2latex.html#mpl2latex.mpl2latex.__exit__">[docs]</a>    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">etype</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
@@ -256,9 +268,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># --- reset rcParams ---</span>
         <span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">original_rcParams</span> <span class="p">)</span>
-        <span class="c1"># --- reset backend ---</span>
-        <span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">original_backend</span> <span class="p">)</span></div></div>
-        
+        <span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span> <span class="s1">&#39;text.usetex&#39;</span> <span class="p">:</span> <span class="kc">False</span> <span class="p">})</span> <span class="c1">#Manually disable latex</span></div></div>
+
 <div class="viewcode-block" id="latex_figsize"><a class="viewcode-back" href="../mpl2latex.html#mpl2latex.latex_figsize">[docs]</a><span class="k">def</span> <span class="nf">latex_figsize</span><span class="p">(</span><span class="n">wf</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">hf</span><span class="o">=</span><span class="p">(</span><span class="mf">5.</span><span class="o">**</span><span class="mf">0.5</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">columnwidth</span><span class="o">=</span><span class="mi">510</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the correct figure size to be displayed in a latex report/publication</span>

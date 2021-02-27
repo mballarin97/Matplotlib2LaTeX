@@ -1,5 +1,6 @@
 import matplotlib
 import matplotlib.pyplot as plt
+from copy import deepcopy
 
 class mpl2latex():
     """ Plot matplotlib figure in pgf for perfect LaTeX reports
@@ -71,13 +72,17 @@ class mpl2latex():
                              
     """
     
-    def __init__(self, back_flag, packages = None, backend='pgf'):
+    def __init__(self, back_flag, packages = None, backend='pgf', SMALL_SIZE = 8, MEDIUM_SIZE = 10, BIGGER_SIZE = 11, BIGGEST_SIZE = 12):
         import subprocess; subprocess.check_call(["latex", "-help"])
         
         self.back_flag = back_flag
         self.original_backend = matplotlib.pyplot.get_backend()
-        self.original_rcParams = matplotlib.rcParams
+        self.original_rcParams = deepcopy(matplotlib.rcParams) # Necessary to create a copy, not a reference
         self.backend = backend
+        self.SMALL_SIZE = SMALL_SIZE
+        self.MEDIUM_SIZE = MEDIUM_SIZE
+        self.BIGGER_SIZE = BIGGER_SIZE
+        self.BIGGEST_SIZE = BIGGEST_SIZE
 
         if packages == None:
             packages = [ "\\usepackage[utf8]{inputenc}" ]
@@ -96,6 +101,13 @@ class mpl2latex():
                 'pgf.rcfonts': False,
                 "pgf.preamble": "\n".join( self.packages ),
             })
+            plt.rc('font', size=self.SMALL_SIZE)          # controls default text sizes
+            plt.rc('axes', titlesize=self.BIGGER_SIZE)     # fontsize of the axes title
+            plt.rc('axes', labelsize=self.MEDIUM_SIZE)    # fontsize of the x and y labels
+            plt.rc('xtick', labelsize=self.SMALL_SIZE)    # fontsize of the tick labels
+            plt.rc('ytick', labelsize=self.SMALL_SIZE)    # fontsize of the tick labels
+            plt.rc('legend', fontsize=self.MEDIUM_SIZE)    # legend fontsize
+            plt.rc('figure', titlesize=self.BIGGEST_SIZE)  # fontsize of the figure title
 
 
     def __exit__(self, etype, value, traceback):

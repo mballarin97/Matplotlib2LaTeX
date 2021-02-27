@@ -1,18 +1,18 @@
 import matplotlib
+import matplotlib.pyplot as plt
+from copy import deepcopy
 
-class Matplotlib2LaTeX():
+class mpl2latex():
     """ Plot matplotlib figure in pgf for perfect LaTeX reports
     
-        Class to plot matplotlib figures using the pgf backend, swapping easily between
-        the two. All the commands that you would use with matplotlib to plot on axes can be
-        used with this class, using self.ax
+        Context to plot matplotlib figures using the pgf backend, swapping easily between
+        the two. Simply put your plotting commands inside the context, and enable the pgf with
+        the *back_flag*
 
         Attributes
         ----------
-        fig: matplotlib.figure.Figure
-            Figure that we want to work with
-        ax: matplotlib.axes
-            Axes of the Figure
+        back_flag: bool
+            If True use the backend *backend* with all the details
         SMALL_SIZE : float, optional
             Size of the font for default text sizes and tick labels. Default 8.
         MEDIUM_SIZE : float, optional
@@ -24,141 +24,99 @@ class Matplotlib2LaTeX():
         packages: list of strings, optional
             LaTeX packages to use, in the form "\\usepackage[options]{package}". If None
             only "\\usepackage[utf8]{inputenc}" is used.
-        all_backends: list of string
-            All possible backends for matplotlib
         original_backend: string
             Original backend when the class is initialized
         original_rcParams: matplotlib.RcParams
             Original rcParams when the class is initialized
+        backend : string, optional
+            Matplotlib backend to use. Default is pgf
+
 
         Methods
         -------
-        reset(rcparams = None, backend = None)
-            Reset matplotlib rcParams and backend to default ones.
+        def __init__(self, back_flag, packages = None, backend='pgf'):
+            Initialize the class.
             
             Parameters
             ----------
-            rcparams : matplotlib.RcParams, optional
-                matplotlib rc params. Default is original RcParams
-            backend : string
-                matplotlib new backend
-                
-        reset_backend(self, backend=None)
-            Reset matplotlib backend
-            
-            Parameters
-            ----------
+            back_flag: bool
+            If True use the backend *backend* with all the details
+            packages: list of strings, optional
+                LaTeX packages to use, in the form "\\usepackage[options]{package}". If None
+                only "\\usepackage[utf8]{inputenc}" is used.
+            original_backend: string
+                Original backend when the class is initialized
+            original_rcParams: matplotlib.RcParams
+                Original rcParams when the class is initialized
             backend : string, optional
-                Matplotlib backend to reset. Default is original_backend
+                Matplotlib backend to use. Default is pgf
                 
-        save_fig(PATH, backend='pgf', tight=True)
-            Save the figure with the backend *backend*, coming back to the backend *original_backend* afterwards.
+        __enter__(self)
+            enter in the context
+
+        __exit__(self)
+            exit from the context
             
-            Parameters
-            ----------
-            PATH: string
-                PATH where to save the image
-            backend: sting, optional
-                backend to use to save the figure. Default pgf
-            tight: bool
-                If True, use tightlayout
-                
-       show()
-           Show the figure
+        Examples
+        --------
+        >>> import matplotlib.pyplot as plt
+        >>> import numpy as np
+        >>> x = np.linspace(0, 100, 1000)
+        >>> flag = True
+        >>> # Write the usual plotting instruction inside the context
+        >>> with mpl2ltx(flag):
+        >>>     plt.plot(x, x**2)
+        >>>     plt.savefig('trial.pgf')
+        >>> # produces the plots and save it in pgf as intended
+
+                             
     """
     
-    def __init__(self, fig, SMALL_SIZE=8, MEDIUM_SIZE=10, BIGGER_SIZE=11, BIGGEST_SIZE=12, 
-                packages = None):
+    def __init__(self, back_flag, packages = None, backend='pgf', SMALL_SIZE = 8, MEDIUM_SIZE = 10, BIGGER_SIZE = 11, BIGGEST_SIZE = 12):
+        import subprocess; subprocess.check_call(["latex", "-help"])
         
-        self.fig = fig
-        self.ax = self.fig.axes
+        self.back_flag = back_flag
+        self.original_backend = matplotlib.pyplot.get_backend()
+        self.original_rcParams = deepcopy(matplotlib.rcParams) # Necessary to create a copy, not a reference
+        self.backend = backend
         self.SMALL_SIZE = SMALL_SIZE
         self.MEDIUM_SIZE = MEDIUM_SIZE
         self.BIGGER_SIZE = BIGGER_SIZE
         self.BIGGEST_SIZE = BIGGEST_SIZE
-        self.all_backends = matplotlib.rcsetup.all_backends
-        self.original_backend = matplotlib.pyplot.get_backend()
-        self.original_rcParams = matplotlib.rcParams
-        
+
         if packages == None:
             packages = [ "\\usepackage[utf8]{inputenc}" ]
-        
         self.packages = packages
-        # Set LaTeX params
-        matplotlib.rcParams.update({ 
-            "pgf.texsystem": "pdflatex",
-            'font.family': 'serif',
-            'text.usetex': True,
-            'pgf.rcfonts': False,
-            "pgf.preamble": "\n".join( self.packages )
-        })
         
-        # Set rc params
-        matplotlib.pyplot.rc('font', size = self.SMALL_SIZE)          # controls default text sizes
-        matplotlib.pyplot.rc('axes', titlesize = self.BIGGER_SIZE)   # fontsize of the axes title
-        matplotlib.pyplot.rc('axes', labelsize = self.MEDIUM_SIZE)    # fontsize of the x and y labels
-        matplotlib.pyplot.rc('xtick', labelsize = self.SMALL_SIZE)    # fontsize of the tick labels
-        matplotlib.pyplot.rc('ytick', labelsize = self.SMALL_SIZE)    # fontsize of the tick labels
-        matplotlib.pyplot.rc('legend', fontsize = self.MEDIUM_SIZE)    # legend fontsize
-        matplotlib.pyplot.rc('figure', titlesize = self.BIGGEST_SIZE)  # fontsize of the figure title
-        
-    def reset(self, rcparams = None, backend = None):
+
+    def __enter__(self):
+        """ If *self.back_flag* is True set all the rc parameters and the correct backend. If False only sets the fontsizes.
         """
-            Reset matplotlib rcParams and backend to default ones.
-            
-            Parameters
-            ----------
-            rcparams : matplotlib.RcParams, optional
-                matplotlib rc params. Default is original RcParams
-            backend : string
-                matplotlib new backend
+        if self.back_flag:
+            # Set LaTeX params
+            matplotlib.rcParams.update({ 
+                "pgf.texsystem": "pdflatex",
+                'font.family': 'serif',
+                'text.usetex': True,
+                'pgf.rcfonts': False,
+                "pgf.preamble": "\n".join( self.packages ),
+            })
+            plt.rc('font', size=self.SMALL_SIZE)          # controls default text sizes
+            plt.rc('axes', titlesize=self.BIGGER_SIZE)     # fontsize of the axes title
+            plt.rc('axes', labelsize=self.MEDIUM_SIZE)    # fontsize of the x and y labels
+            plt.rc('xtick', labelsize=self.SMALL_SIZE)    # fontsize of the tick labels
+            plt.rc('ytick', labelsize=self.SMALL_SIZE)    # fontsize of the tick labels
+            plt.rc('legend', fontsize=self.MEDIUM_SIZE)    # legend fontsize
+            plt.rc('figure', titlesize=self.BIGGEST_SIZE)  # fontsize of the figure title
+
+
+    def __exit__(self, etype, value, traceback):
+        """ When exiting the context return to usual parameters, i.e. to original backend and original rcparams
         """
-        if backend == None:
-            backend = self.original_backend
-        if rcparams == None:
-            rcparams = self.original_rcParams
         # --- reset rcParams ---
-        matplotlib.rcParams.update( matplotlib.rcParamsDefault)
-        # --- reset backend ---
-        self.reset_backend(backend=backend)
-        
-    def reset_backend(self, backend=None):
-        """
-            Reset matplotlib backend
-            
-            Parameters
-            ----------
-            backend : string, optional
-                Matplotlib backend to reset. Default is original_backend
-        """
-        if backend == None:
-            backend = self.original_backend
-        matplotlib.use(backend)
-            
-    def save_fig(self, PATH, backend='pgf', tight=True):
-        """Save the figure
-        
-        Save the figure with the backend *backend*, coming back to the backend *original_backend* afterwards.
-        
-        Parameters
-        ----------
-        PATH: string
-            PATH where to save the image
-        backend: sting, optional
-            backend to use to save the figure. Default pgf
-        tight: bool
-            If True, use tightlayout
-        """
-        
-        matplotlib.use(backend)
-        if tight:
-            self.fig.tight_layout()
-        self.fig.savefig(PATH)
-        self.reset()
-    
-    def show(self):
-        matplotlib.pyplot.show()
-        
+        matplotlib.rcParams.update( self.original_rcParams )
+        matplotlib.rcParams.update({ 'text.usetex' : False }) #Manually disable latex
+
 def latex_figsize(wf=0.5, hf=(5.**0.5-1.0)/2.0, columnwidth=510):
     """
         Get the correct figure size to be displayed in a latex report/publication
